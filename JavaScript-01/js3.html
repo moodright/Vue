@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>流程控制</title>
+    <script>
+        'use strict';
+
+        // if
+        let age = 2;
+        if(age > 1) {
+            console.log("test");
+        }
+
+        // while
+        while(age < 10) {
+            age += 1;
+            console.log(age);
+        }
+
+        // for
+        for (let i = 0; i < age; i++) {
+            console.log(i);
+        }
+
+        // for...in 输出数组的下标
+        let arr =  ['a','b','c','d'];
+        for (let index in arr) {
+            console.log(index);
+        }
+        // for...of 输出数组的值
+        for (const element of arr) {
+            console.log("数组元素值" + element);
+        }
+
+        // forEach
+        // value: 数组当前元素值
+        // index: 数组当前元素下标
+        // array: 数组对象
+        arr.forEach(function(value, index, array) {
+            console.log(index, value, array);
+        });
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

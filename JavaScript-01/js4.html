@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Map和Set</title>
+    <script>
+        'use strict';
+        // 定义Map 传入的参数需要是可以迭代的类型（如数组类型）
+        let map = new Map([['Tom',1], ['Jack',2], ['Macie',3]]);
+        // console.log(map);
+
+        //赋值
+        map.set('Tom', 100);
+        // console.log(map);
+
+        //取值
+        console.log(map.get('Tom'));
+
+        //删除
+        map.delete('Tom');
+        // console.log(map);
+
+        //是否存在键
+        // console.log(map.has('Tom'));
+        // console.log(map.has('Macie'));
+
+
+        // 定义一个集合
+        // 集合会去除重复的元素
+        let set = new Set([1,2,3,4,5,5,5,5]);
+        // console.log(set);
+
+        //添加元素
+        set.add(6);
+        console.log(set);
+
+        //删除元素
+        set.delete(6);
+        console.log(set);
+
+        //判断元素是否在集合内
+        console.log(set.has(5));
+        console.log(set.has(8));
+    </script>
+</head>
+<body>
+
+</body>
+</html>

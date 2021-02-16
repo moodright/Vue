@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>严格检查模式</title>
+    <script>
+        'use strict';
+        let person = {
+            name : 'moodright',
+            age : 1,
+            email : "moodright@qq.com"
+        };
+        console.log(person);
+
+        // 对象赋值
+        person.age = 3;
+        console.log(person);
+
+        // 使用一个不存在的对象属性 不会报错！ undefined
+        console.log(person.sex);
+
+        // 动态的删减属性
+        delete person.email;
+        console.log(person);
+
+        // 动态添加属性
+        person.email = "moonlight-3@foxmail.com";
+        console.log(person);
+
+        // 判断属性是否在对象中
+        // JavaScript 中的所有的键都是字符串，值是任意对象
+        console.log('email' in person);
+        console.log(`email` in person);
+        console.log(`toString` in person);
+
+        // 判断一个属性是否是这个对象自身拥有的
+        console.log(person.hasOwnProperty('age'));
+        console.log(person.hasOwnProperty('toString'));
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

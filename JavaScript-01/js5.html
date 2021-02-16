@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Iterator</title>
+    <script>
+        'use strict';
+        // 迭代数组
+        let array = [5,6,7,8,9];
+        for (let value of array) {
+            console.log(value);
+        }
+
+        // 迭代 Map
+        let map = new Map([['Tom',1],['Jack',2],['Macie',3]]);
+        for (let value of map) {
+            console.log(value);
+        }
+
+        // 迭代 Set
+        let set = new Set(['a','b','c']);
+        for (let value of set) {
+            console.log(value);
+        }
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
