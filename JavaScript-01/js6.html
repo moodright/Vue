@@ -2,9 +2,48 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>函数的定义和参数获取</title>
+    <script>
+        'use strict';
+        // 函数定义
+        // 方法一
+        function a(x) {
+            console.log(x);
+        }
+
+        // 方法二
+        let b = function(x) {
+            console.log(x);
+        }
+
+        // 函数体内自带的参数
+        // arguments：传进来的所有的参数 是一个数组对象
+        let c = function(x) {
+            console.log(arguments);
+            // input: c(1,2,3,4,5,6)
+            // output: Arguments(5) [1, 2, 3, 4, 5, callee: (...), Symbol(Symbol.iterator): ƒ]
+
+            //
+            console.log(arguments.length);
+            console.log(arguments[1]);
+        }
+
+        // rest：ES6标准引入的新特性，获取除了已经定义的参数之外的所有参数 是一个数组对象
+        let d = function(x,...rest) {
+            console.log("x=>" + x);
+            console.log("rest=>" + rest);
+            // input: d(1,2,3,4,5,6)
+            // output: x=>1
+            //         rest=>2,3,4,5,6
+
+            console.log(rest[0]);
+            console.log(rest[1]);
+            console.log(rest[8]);
+        }
+
+    </script>
 </head>
 <body>
-$END$
+
 </body>
 </html>
