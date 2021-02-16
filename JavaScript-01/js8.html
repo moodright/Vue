@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>方法的定义和调用</title>
+
+    <script>
+        'use strict';
+        //在对象中定义方法
+        var person = {
+            name : 'moodright',
+            birth : 2000,
+            age : function() {
+                let now = new Date().getFullYear();
+                return now - this.birth;
+            }
+        };
+        console.log("person.age() ", person.age());
+
+
+        function getAge() {
+            let now = new Date().getFullYear();
+            return now - this.birth;
+        }
+        var me = {
+            name : 'Tom',
+            birth : 1998,
+            // age : getAge() 错误写法
+            age : getAge
+
+        }
+        console.log("me.age() ", me.age());
+        // console.log(getAge());  Uncaught TypeError: Cannot read property 'birth' of undefined
+
+        // this 代表当前对象的引用
+        // 在js中可以调用apply()改变this的引用
+        // apply(thisArg: any, argArray?: any)
+        // 调用函数，用指定的对象替换函数的this值，并用指定的数组替换函数的参数
+        //      thisArg: this引用的对象
+        //      argArray: 传递进方法的参数数组, 可以为空
+        console.log("getAge.apply() ", getAge.apply(me, []));
+        console.log("getAge.apply() ", getAge.apply(person, []));
+
+    </script>
+</head>
+<body>
+</body>
+</html>

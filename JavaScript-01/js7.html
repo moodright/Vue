@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>变量的作用域</title>
+    <script>
+        'use strict';
+
+        // 函数内定义的变量在函数外部无法被访问
+        function x() {
+            var y = 1;
+        }
+        // y = y + 1;
+
+        // output: Uncaught ReferenceError: y is not defined
+        x();
+
+        // -----------------------------------------------------
+
+
+        function a() {
+            var x = 1;
+            // 内部函数可以访问外部函数的成员 反之则不行
+            function b() {
+                var y = x + 1;
+            }
+            // var z = y + 1;
+        }
+
+        // -----------------------------------------------------
+
+        // 在JS中函数查找变量从自身函数开始，由 “内” 向 “外” 查找
+        // 若外部存在同名变量，则内部函数会屏蔽外部的变量
+        function c() {
+            var x = 1;
+            function d() {
+                var x = 2;
+                console.log("inner " + x);  // inner 2
+            }
+            console.log("outer " + x);  // outer 1
+            d();
+        }
+        // output: outer 1
+        //         inner 2
+        c();
+
+        // -----------------------------------------------------
+
+        //变量提升
+        function e() {
+            var x = 'x';
+            console.log(x + y);
+            // 后定义的变量在js中会被提升到头部
+            var y = 'y';
+        }
+        // output: xundefined
+        e();
+
+        // -----------------------------------------------------
+
+        //全局变量
+        var global = 1;
+        function f() {
+            console.log(global);
+        }
+        f();
+        console.log(global);
+        //全局对象：默认所有的全局变量都会自动绑定在 window 对象上
+        alert(window.global);
+        window.alert(window.global);
+
+        // -----------------------------------------------------
+
+        // 全局对象能够被修改，若是全局对象命名不规范，则很有可能发生冲突
+        var old_alert = window.alert;
+        window.alert = function p(x) {
+            console.log(x);
+        }
+        window.alert(111);
+        window.alert = old_alert;
+        window.alert(222);
+        //规范：由于所有的全局变量都会绑定到 window 对象上
+        //     如果引入了多个 js 文件，若是全局变量的命名不规范很有可能发生变量命名冲突
+        //     为了避免冲突，需要把自己定义的全局变量放到自己定义的全局对象上
+        var global_object = {
+
+        };
+        global_object.name = 'moodright';
+        global_object.age = 1;
+        console.log(global_object.name, global_object.age);
+
+        // -----------------------------------------------------
+
+        // 局部变量 let
+        function test() {
+            var x = 10;
+            for (var i = 0; i < x; i++) {
+                console.log(i);
+            }
+            console.log("outer " + i);
+        }
+        // 循环体外能访问到循环体内定义的变量 并不规范
+        // output: outer 10
+        test();
+
+        function test2() {
+            var x = 10;
+            for (let i = 0; i < x; i++) {
+                console.log(i);
+            }
+            // console.log("outer " + i);
+        }
+        // output: Uncaught ReferenceError: i is not defined
+        test2();
+
+        // -----------------------------------------------------
+
+        // 常量 const
+        const constantVariable = 1234;
+        // constantVariable = 1;    Uncaught TypeError: Assignment to constant variable.
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
