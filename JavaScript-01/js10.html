@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JSON</title>
+    <script>
+        'use strict';
+        let user = {
+            name : "moodright",
+            age : 1,
+            sex : "male"
+        }
+
+        console.log(user);  // {name: "moodright", age: 1, sex: "male"}
+        console.log(JSON.stringify(user));  // {"name":"moodright","age":1,"sex":"male"}
+
+        let json = '{"name":"moodright","age":1,"sex":"male"}';
+        let obj = JSON.parse(json);
+        console.log("obj ", obj);
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
