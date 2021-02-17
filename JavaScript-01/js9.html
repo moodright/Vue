@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>About Date Object</title>
+    <script>
+        'use strict';
+        // 标准对象
+        // js中判断对象类型可以使用 typeof 关键字
+        console.log("typeof ", typeof 123);
+        console.log("typeof ", typeof '123');
+        console.log("typeof ", typeof NaN);
+        console.log("typeof ", typeof [1,2,3]);
+        console.log("typeof ", typeof true);
+        console.log("typeof ", typeof Math.abs);
+        console.log("typeof ", typeof undefined);
+
+        let now = new Date();
+        console.log(now);
+
+        console.log(now.getFullYear());
+        console.log(now.getMonth());    // 月份[0,11]
+        console.log(now.getDate());
+        console.log(now.getHours());
+        console.log(now.getMinutes());
+        console.log(now.getSeconds());
+
+        console.log(now.getDay());  // 星期几
+        console.log(now.getTime()); // 时间戳
+
+        // 获取时间戳
+        let timeStamp = new Date().getTime();
+        // 利用时间戳转换为日期对象
+        now = new Date(timeStamp);
+        // 日期对象转换
+        console.log(now.toLocaleDateString());  // 2021/2/17
+        console.log(now.toLocaleString());      // 2021/2/17下午2:50:35
+        console.log(now.toLocaleTimeString());  // 下午2:50:35
+        console.log(now.toJSON());              // 2021-02-17T06:51:29.601Z
+        console.log(now.toTimeString());        // 14:51:54 GMT+0800 (中国标准时间)
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
