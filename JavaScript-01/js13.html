@@ -5,26 +5,81 @@
     <title>DOM对象</title>
 </head>
 <body>
-    <h1>This is a heading.</h1>
+
+    <h1 id="d">This is a heading.</h1>
     <p id="a">xxx</p>
     <div class="b">
         <p class="c">111</p>
     </div>
 
+
+    <div id="div_id">
+        <p id="p_id">Thie is id p.</p>
+        <div id="child_div_id">
+            This is id a div.
+        </div>
+        <div class="div_class">
+            This is a class div.
+        </div>
+    </div>
+
     <script>
         'use strict';
-        // 异常情况： 若<script>代码块放在<head>标签内 则无法正常获取文档对象（如a）
+        // 异常情况： 1. 若<script>代码块放在<head>标签内 则无法正常获取文档对象。
+        //             答: 判断为JS代码块与HTML标签加载顺序的问题，
+        //                 JS代码块运行时HTML标签并没有完全加载故导致了此问题
+        //                 以后需要使用JS获取结点时，代码块应放在HTML标签后
+        //
+        //          2. 使用 document.getElementsByTagName
+        //                 document.getElementsByClassName
+        //                 获取结点时无法通过结点获知父子结点以及无法修改HTML样式和CSS样式问题。
+        //             答: 因为上述两个方法获取的是对象是集合对象，需要使用索引下标来指定
+        //                 具体的结点，而 document.getElementById 获取的是单个具体对象，所
+        //                 以没有上述的问题存在，问题终于解决了！
+
 
         // 获取DOM结点
+        // 应注意 h1、b、c 为 HTMLCollection 对象
+        // 调用时需要使用索引下标调用
         let h1 = document.getElementsByTagName('h1');
         let a = document.getElementById('a');
         let b = document.getElementsByClassName('b');
         let c = document.getElementsByClassName('c');
 
+        // --------------------------------------------------------------------
 
+        // 更新DOM结点
+        // 使用结点对象修改文本
+        h1[0].innerText = 'Moonlight';
+        a.innerText = 'test';
+        a.innerHTML = '<strong>test</strong>';
 
+        // 使用结点对象更新CSS样式
+        h1[0].style.color = 'green';
+        a.style.color = 'red';
+        a.style.fontSize = '4em';
+        a.style.padding = '20px';
 
+        // --------------------------------------------------------------------
 
+        // 删除DOM结点：先获取父节点 再通过父节点删除自己
+        let father = document.getElementById('div_id');
+        // father.removeChild(p_id);
+        // father.removeChild(child_div_id);
+
+        // 通过自身结点获取父节点再删除自己
+        // let self = document.getElementById('p_id');
+        // self.parentElement.removeChild(p_id);
+        // self.parentNode.removeChild(p_id);
+
+        // 父节点可以获取子节点集合
+        // father.children;
+        // 子节点可以使用索引调用
+        // father.children[0];
+        // 使用索引删除字节点
+        // father.removeChild(father.children[0]);
+        // father.removeChild(father.children[1]);
+        // 注意：利用索引动态删除子节点时，索引下标也在动态变化
 
     </script>
 </body>

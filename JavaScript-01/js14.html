@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>创建和插入DOM结点</title>
+</head>
+<body>
+    <p id="message">message</p>
+    <div id="userList">
+        <p id="moonlight">Moonlight</p>
+        <p id="moodright">Moodright</p>
+        <p id="Macie">Macie</p>
+    </div>
+
+    <script>
+        'use strict';
+        let message = document.getElementById('message');
+        let userList = document.getElementById('userList');
+
+        // 更改已存在的结点的位置
+        userList.appendChild(message);
+
+        // 创建DOM结点
+        let jack = document.createElement('p');
+        // 可以使用 setAttribute 方法为结点标签设置属性 key：属性名 -> value：属性值
+        // jack.setAttribute('id','jack');
+        jack.id = 'jack';
+        jack.innerText = 'I\'m Jack';
+        jack.style.color = 'red';
+        jack.className = 'he has a classname';
+        // 追加子节点
+        userList.appendChild(jack);
+
+        let myScript = document.createElement('script');
+        myScript.setAttribute('type', 'text/javascript');
+        // 插入结点在参考节点之前
+        // userList : 父节点
+        // myScript : 插入的结点
+        // jack : 参考结点
+        userList.insertBefore(myScript, jack);
+    </script>
+</body>
+</html>
