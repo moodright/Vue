@@ -2,9 +2,30 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>DOM对象</title>
 </head>
 <body>
-$END$
+    <h1>This is a heading.</h1>
+    <p id="a">xxx</p>
+    <div class="b">
+        <p class="c">111</p>
+    </div>
+
+    <script>
+        'use strict';
+        // 异常情况： 若<script>代码块放在<head>标签内 则无法正常获取文档对象（如a）
+
+        // 获取DOM结点
+        let h1 = document.getElementsByTagName('h1');
+        let a = document.getElementById('a');
+        let b = document.getElementsByClassName('b');
+        let c = document.getElementsByClassName('c');
+
+
+
+
+
+
+    </script>
 </body>
 </html>
