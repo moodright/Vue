@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单输入验证和MD5加密</title>
+    <!-- bootcdn -->
+<!--     <script src="https://cdn.bootcdn.net/ajax/libs/blueimp-md5/2.18.0/js/md5.js"></script> -->
+    <script src="JavaScript-01/md5.js"></script>
+</head>
+<body>
+    <!-- onsubmit: 表单提交事件属性 -->
+    <form method="post" onsubmit="return formCheck()">
+        <div>
+            <span>用户名：</span>
+            <input type="text" id="username" name="username">
+        </div>
+        <div>
+            <span>密码：</span>
+            <input type="password" id="origin-password">
+            <!-- 隐藏域传值 -->
+            <input type="hidden" id="encrypt-password" name="encrypt-password">
+        </div>
+            <!-- onclick: 按钮点击事件属性 -->
+            <button type="submit">提交</button>
+    </form>
+
+    <script>
+        function formCheck() {
+            let originPassword = document.getElementById('origin-password');
+            let encryptPassword = document.getElementById('encrypt-password');
+            // md5加密
+            encryptPassword.value = md5(originPassword.value);
+            // 拒绝提交表单
+            // return false;
+            return true;
+        }
+    </script>
+</body>
+</html>

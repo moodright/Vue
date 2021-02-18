@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>js操作表单</title>
+</head>
+<body>
+    <form>
+        <div>
+            <span>用户名：</span>
+            <input type="text" id="username">
+        </div>
+        <div>
+            <span>性别：</span>
+            <input type="radio" name="sex" value="male">男
+            <input type="radio" name="sex" value="female">女
+        </div>
+        <div>
+            <span>爱好</span>
+            <input type="checkbox" name="hobby" value="running">跑步
+            <input type="checkbox" name="hobby" value="swimming">游泳
+            <input type="checkbox" name="hobby" value="singing">唱歌
+        </div>
+        <div>
+            <span>出生日期</span>
+            <select name="birthday">
+                <option value="1998">1998</option>
+                <option value="1999">1999</option>
+                <option value="2000">2000</option>
+            </select>
+        </div>
+    </form>
+
+    <script>
+        'use strict';
+        // 获取输入框的值
+        let username = document.getElementById('username');
+        console.log(username.value);
+
+        // 获取单选框的值
+        // 获取到的单选框为 HTMLCollection
+        let sex = document.getElementsByName('sex');
+        console.log(sex);
+        console.log(sex.length);
+        console.log(sex[0].checked);
+        console.log(sex[0].value);
+
+        // 获取复选框的值
+        // HTMLCollection
+        let hobby = document.getElementsByName('hobby');
+        console.log(hobby);
+        console.log(hobby.length);
+        console.log(hobby[0].checked);
+        console.log(hobby[0].value);
+
+        //获取下拉框的值
+        // HTMLCollection
+        let birthday = document.getElementsByName('birthday');
+        console.log(birthday);
+        console.log(birthday.length);
+        console.log(birthday[0].value);
+
+    </script>
+</body>
+</html>
