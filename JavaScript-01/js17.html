@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JQuery Test</title>
+    <!-- $(selector).action() -->
+    <script src="jquery-3.5.1.js"></script>
+
+</head>
+<body>
+    <button type="button" id="moon">点我</button>
+    <script>
+        //JQuery Test
+        $('#moon').click(function() {
+            alert('Hello,JQuery!');
+        });
+    </script>
+
+    <!-- ------------------------------------------------------------------------------------------------ -->
+    <br>
+
+    光标位置：<span id="mouse-position"></span>
+    <div id="mouse-move" style="width:500px;height: 500px;background: aquamarine">
+    </div>
+    <script>
+        // JQuery事件
+        // 当网页元素加载完毕后响应事件
+        // $(document).ready(function(){
+        //     $('#mouse-move').mousemove(function(position) {
+        //         $('#mouse-position').text('x: ' + position.pageX + 'y: ' + position.pageY);
+        //     });
+        // });
+
+        $(function() {
+           $('#mouse-move').mousemove(function(position) {
+              $('#mouse-position').text('x: ' + position.pageX + 'y: ' + position.pageY);
+           });
+        });
+    </script>
+
+    <!-- ------------------------------------------------------------------------------------------------ -->
+    <br>
+
+    <ul id="list">
+        <li class="java">Java</li>
+        <li id="python">Python</li>
+    </ul>
+    <script>
+        // 操作DOM元素
+        $(function() {
+            $('#list li[class=java]').text('Hello!');
+            $('#list li[id=python]').text('Moonlight');
+            $('#list li[class=java]').css("font-size","2em");
+            $('#list li[id=python]').css({"color":"green", "background":"red"});
+        });
+    </script>
+
+
+</body>
+</html>
