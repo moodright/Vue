@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test v-bind</title>
+    <!-- 导入vue.js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+    <!-- vm.message利用v-bind指令绑定到title属性 -->
+    <span id="app" v-bind:title="message">This is a span.</span>
+
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                message: "moonlight"
+            }
+        });
+    </script>
+</body>
+</html>
