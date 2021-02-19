@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test v-for</title>
+    <!-- vue.js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+    <!-- 在div标签使用 v-for 指令没有生效 -->
+    <div id="app">
+        <p v-for="item in items">
+            {{item.username}}
+        </p>
+        <h1 v-for="item in items">
+            {{item.username}}
+        </h1>
+        <li v-for="item in items">
+            {{item.username}}
+        </li>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            //将vm对象根据id选择器绑定对应元素
+            el: "#app",
+            data: {
+                //定义数组
+                items: [
+                    {username: 'moodright'},
+                    {username: 'moonlight'},
+                    {username: 'moon'}
+                ]
+            }
+        });
+    </script>
+</body>
+</html>
