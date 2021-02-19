@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test v-on</title>
+    <!-- vue.js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+    <!-- v-on指令绑定click事件 -->
+    <button id="app" v-on:dblclick="showName">点击我</button>
+    <script>
+        var vm = new Vue({
+           el: "#app",
+           data: {
+               message: "moodright"
+           },
+           methods: {
+               // 在 `methods` 对象中定义方法
+             showName: function (event) {
+                 // `this`在方法里指向当前 Vue 实例
+                 alert(this.message);
+                 // `event` 是原生 DOM 事件
+                 alert(event.target.tagName);
+             }
+           }
+        });
+    </script>
+</body>
+</html>
