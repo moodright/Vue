@@ -15,8 +15,8 @@
         <h1 v-for="item in items">
             {{item.username}}
         </h1>
-        <li v-for="item in items">
-            {{item.username}}
+        <li v-for="(item, index) in items">
+            {{item.username}} -- {{index}}
         </li>
     </div>
 
