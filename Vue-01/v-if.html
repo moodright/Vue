@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test v-if</title>
+    <!-- vue.js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+    <div id="app">
+        <p v-if="number===1">Number 1</p>
+        <p v-else-if="number===2">Number 2</p>
+        <p v-else>Number 3</p>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                number: 333
+            }
+        });
+    </script>
+</body>
+</html>
