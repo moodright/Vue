@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>监听子组件事件事件用方法包括并接收回调参数</title>
+    <!-- vue.js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+    <div id="app" v-bind:style="{ fontSize: currentFontSize + 'em'}">
+        <blog-post v-for="post in posts" v-bind:post="post" v-on:enlarge-text="onEnlargeText"></blog-post>
+    </div>
+
+    <script>
+        Vue.component('blog-post', {
+           props: ['post'],
+           template: `
+                   <div>
+                       <p>{{post.title}}</p>
+                       <div v-html="post.content"></div>
+                       <button v-on:click="$emit('enlarge-text', 0.2)">
+                           放大字体
+                       </button>
+                   </div>
+           `
+        });
+
+        var vm = new Vue({
+            el: "#app",
+            data: {
+               posts: [
+                   { id: 1, title: 'Lo Vas A Olvidar', content: '<span style="color:red">This is a test content!</span>'},
+                   { id: 2, title: 'Me and You', content: '<span style="color:red">This is a test content!</span>'},
+                   { id: 3, title: 'Ocean Eyes', content: '<span style="color:red">This is a test content!</span>'}
+               ],
+               currentFontSize: 1
+            },
+            methods: {
+               onEnlargeText: function (enlargeAmount) {
+                    this.currentFontSize += enlargeAmount;
+               }
+            }
+        });
+    </script>
+</body>
+</html>

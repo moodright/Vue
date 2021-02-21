@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>通过Prop向子组件传递数据</title>
+    <!-- vue.js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+    <div id="app">
+        <blog-post v-for="post in posts" v-bind:title="post.title" v-bind:id="post.id"></blog-post>
+    </div>
+    <script>
+        Vue.component('blog-post', {
+            // Prop 是可以在组件上注册的一些自定义 attribute
+            // 当一个值传递给 prop attribute 的时候, 它就变成了那个组件实例的一个 property
+            // 一个组件默认可以拥有任意数量的 prop, 任何值都可以传递给任何 prop
+
+           // props: ['title', 'id'],
+            props: {
+                title: String,
+                id: Number
+            },
+           template: '<h3>{{title}}, {{id}}</h3>'
+        });
+
+        new Vue({
+            el: "#app",
+            data: {
+                posts: [
+                    { id: 1, title: 'title 1'},
+                    { id: 2, title: 'title 2'},
+                    { id: 3, title: 'title 3'}
+                ]
+            }
+        })
+    </script>
+</body>
+</html>

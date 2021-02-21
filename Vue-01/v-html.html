@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test v-html</title>
+    <!-- vue.js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+    <div id="app">
+        <p>{{rawHtml}}</p>
+        <!-- v-html 指令解析 html标签 -->
+        <p v-html="rawHtml"></p>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                rawHtml: '<span style="color:red">This should be red.</span>'
+            }
+        });
+    </script>
+</body>
+</html>

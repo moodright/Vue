@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>单个根元素</title>
+    <!-- vue.js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+    <div id="app">
+        <blog-post v-for="post in posts" v-bind:post="post"></blog-post>
+    </div>
+    <script>
+        Vue.component('blog-post', {
+            // 传递整个 post 对象
+            // 方便 post 对象添加新的属性时可以在模板代码内直接调用
+           props: ['post'],
+            // 模板中只能包含一个根元素
+            // 为了支持 IE , 请使用折行转义字符取而代之
+           template: `
+                   <div>
+                       <h3>{{post.title}}</h3>
+                       <div v-html="post.content"></div>
+                   </div>
+           `
+        });
+
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                posts: [
+                    { id: 1, title: 'Lo Vas A Olvidar', content: '<span style="color:red">This is a test content!</span>'},
+                    { id: 2, title: 'Me and You', content: '<span style="color:red">This is a test content!</span>'},
+                    { id: 3, title: 'Ocean Eyes', content: '<span style="color:red">This is a test content!</span>'}
+                ]
+            }
+        });
+    </script>
+</body>
+</html>

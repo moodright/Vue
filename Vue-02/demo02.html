@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>第一个组件</title>
+    <!-- vue.js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+    <div id="my-component">
+        <!-- 组件可以进行任意次数的复用, 且各组件维护自己的 count 属性 -->
+        <button-counter></button-counter>
+        <button-counter></button-counter>
+        <button-counter></button-counter>
+    </div>
+
+    <!-- 脱离了 Vue 实例组件无法生效 -->
+    <!-- <button-counter></button-counter> -->
+    <script>
+        // 定义一个名为 button-counter 的新组件
+        Vue.component('button-counter', {
+           data: function() {
+               return {
+                   //返回一个对象
+                   //其中对象的count属性初始值为 0
+                   count: 0
+               }
+           },
+            template: '<button v-on:click="count++">You click me {{count}} times.</button>'
+        });
+
+
+        new Vue({
+            el: '#my-component'
+        })
+    </script>
+</body>
+</html>
