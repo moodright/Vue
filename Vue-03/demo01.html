@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test axios</title>
+    <!-- vue.js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- axios.js -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <p>{{info.name}}</p>
+        <p>{{info.url}}</p>
+        <p>{{info.address.street}}</p>
+        <p>{{info.address.city}}</p>
+        <p>{{info.address.country}}</p>
+        <p v-for="link in info.links">
+            {{link.name}} - {{link.url}}
+        </p>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            // 接收请求响应的数据函数
+            // 与 data 属性不同
+            data() {
+                return {
+                    // 定义接收响应头数据的对象
+                    info: {
+                        // 请求的返回参数必须和 json 字符串一致
+                        name: '',
+                        url: '',
+                        address: {
+                            street: '',
+                            city: '',
+                            country: ''
+                        },
+                        links: [
+                            {
+                                name: '',
+                                url: ''
+                            },
+                            {
+                                name: '',
+                                url: ''
+                            },
+                            {
+                                name: '',
+                                url: ''
+                            }
+                        ]
+                    }
+                }
+            },
+            // Vue 实例生命周期中存在的钩子函数, 还有其他许多钩子函数
+            // mounted: 编译好的 HTML 挂载到页面完成后执行的事件钩子
+            //          此钩子函数中一般会做一些 ajax 请求获取数据进行数据初始化
+            //          在整个实例中只执行一次
+            mounted() {
+                axios.get('data.json').then(response => (
+                    // 获取响应体的数据
+                   this.info = response.data
+                ));
+
+                // 测试：
+                // 无法赋给 info, 官方文档在 vue-axios 整合中也没有说明此中用法
+                // axios.get('data.json').then(function (response) {
+                //     console.log(response.data);
+                //     this.info = response.data;
+                // });
+            }
+        });
+    </script>
+</body>
+</html>
