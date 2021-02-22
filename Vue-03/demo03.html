@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test slot</title>
+    <!-- vue.js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <todo-list>
+            <!-- 在自定义标签上使用 slot 属性, 可以将内容传递给具名插槽, 但自 2.6.0 版本后已被废弃 -->
+            <!-- 正常使用持续到 Vue 3.0 -->
+            <todo-title v-bind:title="title" slot="todo-title"></todo-title>
+            <todo-contents v-for="todoContent in todoContents" v-bind:content="todoContent" slot="todo-contents"></todo-contents>
+        </todo-list>
+
+        <todo-list>
+            <!-- 新的 v-slot 指令替代了 slot 属性 -->
+            <!-- 踩坑：该指令需要在 template 标签上使用 -->
+            <template v-slot:todo-title>
+                <todo-title v-bind:title="title"></todo-title>
+            </template>
+            <template v-slot:todo-contents>
+                <todo-contents v-for="todoContent in todoContents" v-bind:content="todoContent"></todo-contents>
+            </template>
+        </todo-list>
+    </div>
+    <script>
+        // 自定义组件
+        Vue.component('todo-list', {
+            // 定义具名插槽
+           template: `
+                   <div>
+                       <slot name="todo-title"></slot>
+                       <ul>
+                           <slot name="todo-contents"></slot>
+                       </ul>
+                   </div>
+           `
+        });
+        Vue.component('todo-title', {
+            props: ['title'],
+            template: '<div>{{title}}</div>'
+        });
+        Vue.component('todo-contents', {
+            props: ['content'],
+            template: '<li>{{content}}</li>'
+        });
+
+        new Vue({
+           el: "#app",
+           data: {
+               title: 'moonlight',
+               todoContents: ['Lo Vas A Olvidar', 'Lovely', 'Bad Guy']
+           }
+        });
+
+    </script>
+</body>
+</html>
