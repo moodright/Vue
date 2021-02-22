@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>计算属性测试</title>
+    <!-- vue.js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+    <div id="app">
+        <p>{{message}}</p>
+        <p>{{reverseMessage}}</p>
+        <!-- 使用方法属性也可以实现计算属性相同的功能 -->
+        <p>{{reverseMessage1()}}</p>
+
+        <!-- 计算属性缓存 vs 方法 -->
+        <!-- 计算属性是基于它们的响应式依赖进行缓存的 -->
+        <!-- 只有在相关响应式依赖发生改变时它们才会重新求值 -->
+        <!-- 也就意味着 showDate 计算属性将不再更新, Date.now() 不是响应式依赖 -->
+        <p>{{showDate}}</p>
+        <!-- 相比之下, 每当出发重新渲染时, 调用方法总会再次执行函数 -->
+        <p>{{showDate1()}}</p>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                message: 'moonlight'
+            },
+            // 计算属性
+            computed: {
+              // 计算属性的 getter
+              reverseMessage: function () {
+                  // message.split('') -> [ "m", "o", "o", "n", "l", "i", "g", "h", "t" ]
+                  // message.split('').reverse() -> [ "t", "h", "g", "i", "l", "n", "o", "o", "m" ]
+                  // message.split('').reverse().join('') -> thgilnoom
+
+                  // this 指向 Vue 实例
+                  return this.message.split('').reverse().join('');
+              },
+              showDate: function () {
+                return Date.now();
+              }
+            },
+            methods: {
+                reverseMessage1: function () {
+                    return this.message.split('').reverse().join('');
+                },
+                showDate1: function () {
+                    return Date.now();
+                }
+            }
+        });
+    </script>
+</body>
+</html>

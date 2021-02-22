@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Prop的大小写</title>
+    <!-- vue.js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- HTML中 attribute 名字是大小写不敏感的 -->
+        <!-- 在使用驼峰命名法的 prop 名需要转换为短横线分隔命名 -->
+        <component-a post-title="Moonlight"></component-a>
+    </div>
+    <script>
+        Vue.component('component-a', {
+            // 在 JavaScript 中使用驼峰命名的变量
+            props: ['postTitle'],
+            template: '<h1>{{postTitle}}</h1>'
+        })
+
+        new Vue({
+            el: "#app"
+        })
+    </script>
+</body>
+</html>

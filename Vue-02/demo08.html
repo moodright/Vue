@@ -2,13 +2,26 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>在组件上使用v-model</title>
+    <title>全局注册</title>
     <!-- vue.js -->
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 </head>
 <body>
-    <alert-box>
-        Something bad happened.
-    </alert-box>
+    <div id="app">
+        <my-component-a></my-component-a>
+        <my-component-b></my-component-b>
+    </div>
+    <script>
+        Vue.component('my-component-a', {
+            template: '<h1>This is a headingA.</h1>'
+        });
+        Vue.component('my-component-b', {
+            template: '<h1>This is a headingB.</h1>'
+        });
+
+        new Vue({
+            el: "#app"
+        })
+    </script>
 </body>
 </html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>传递静态或动态的Prop</title>
+    <!-- vue.js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 静态的传入一个 prop 值 -->
+        <component-a title="moon"></component-a>
+        <!-- 使用 v-bind 指令动态的传递一个 prop 值 -->
+        <component-a v-bind:title="message + ' is my nick name'"></component-a>
+
+        <!-- 上述两个示例中, 传入的值都是字符串类型的, 但实际上任何类型的值都可以传给一个 prop -->
+
+            <!-- 传入一个数字 -->
+            <component-a v-bind:title="selfNumber + ' ' + typeof selfNumber"></component-a>
+            <!-- 传入一个布尔值 -->
+            <component-a v-bind:title="isRight + ' ' + typeof isRight"></component-a>
+            <!-- 传入一个数组 -->
+            <component-a v-bind:title="array + ' ' + typeof array"></component-a>
+            <!-- 传入一个对象 -->
+            <component-b v-bind:blog="blog"></component-b>
+            <!-- 传入一个对象的所有 property 到 props 中-->
+            <component-c v-bind="blog"></component-c>
+    </div>
+    <script>
+        Vue.component('component-a', {
+            props: ['title'],
+            template: '<h1>{{title}}</h1>'
+        });
+        Vue.component('component-b', {
+           props: ['blog'],
+           template: `
+                   <div style="color:red">
+                       <p>{{blog.blog_id}}</p>
+                       <p>{{blog.blog_title}}</p>
+                       <p>{{blog.blog_comments}}</p>
+                       <p>{{blog.blog_likes}}</p>
+                   </div>
+           `
+        });
+        Vue.component('component-c', {
+           props: {
+               blog_id: Number,
+               blog_title: String,
+               blog_comments: Array,
+               blog_likes: Number
+           },
+            template: `
+                <div style="color:royalblue">
+                    <p>{{blog_id}}</p>
+                    <p>{{blog_title}}</p>
+                    <p>{{blog_comments}}</p>
+                    <p>{{blog_likes}}</p>
+                </div>
+            `
+        });
+
+        new Vue({
+            el: "#app",
+            data: {
+                message: 'moonlight',
+                selfNumber: 1,
+                isRight: false,
+                array: ['moonlight', 'moodright', 'badpast'],
+                blog: {
+                    blog_id: 1,
+                    blog_title: 'This is a blog',
+                    blog_likes: 42,
+                    blog_comments: ['a', 'b', 'c']
+                }
+            }
+        });
+    </script>
+</body>
+</html>

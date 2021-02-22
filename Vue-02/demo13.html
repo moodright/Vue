@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Props验证</title>
+    <!-- vue.js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- [Vue warn]: Invalid prop: type check failed for prop "propA". Expected Number with value NaN, got Array -->
+        <my-component v-bind:prop-a="array"></my-component>
+        <p>--------------------------------------------------------</p>
+
+        <!-- [Vue warn]: Invalid prop: type check failed for prop "propB". Expected String, Number, got Array -->
+        <my-component v-bind:prop-b="array"></my-component>
+        <p>--------------------------------------------------------</p>
+
+        <!-- Missing required prop: "propC" 为什么报警告问题位置, 待解决-->
+        <my-component v-bind:prop-c="message"></my-component>
+        <p>--------------------------------------------------------</p>
+
+        <my-component v-bind:prop-d="selfNumber"></my-component>
+        <p>--------------------------------------------------------</p>
+
+        <!-- Invalid prop: custom validator check failed for prop "propF". -->
+        <my-component v-bind:prop-f="selfNumber"></my-component>
+
+
+
+    </div>
+    <script>
+        Vue.component('my-component', {
+            // 组件可以为 props 指定验证要求
+            // 验证失败的时候,  (开发环境构建版本的) Vue 将会产生一个控制台警告
+           props: {
+                // 基础的类型检查 ( `null` 和 `undefined` 会通过类型验证 )
+               propA: Number,
+               // 多个可能的类型
+               propB: [String, Number],
+               // 必填的字符串
+               propC: {
+                   type: String,
+                   required: true
+               },
+               // 带有默认值的数字
+               propD: {
+                   type: Number,
+                   default: 100
+               },
+               // 带有默认值的对象
+               propE: {
+                   type: Object,
+                   default: function () {
+                       return {
+                           message: "I'm the default object.message"
+                       };
+                   }
+               },
+               // 自定义的验证函数, 使用 validator 属性
+               propF: {
+                   validator: function(arg) {
+                       return arg > 10
+                   }
+               }
+           },
+           template: `
+                   <div>
+                       <p>{{propA}}</p>
+                       <p>{{propB}}</p>
+                       <p>{{propC}}</p>
+                       <p>{{propD}}</p>
+                       <p>{{propE.message}}</p>
+                       <p>{{propF}}</p>
+                   </div>
+           `
+        });
+
+        new Vue({
+           el: "#app",
+           data: {
+               message: "This is a message",
+               array: [1,2,3],
+               selfNumber: 5
+           }
+        });
+    </script>
+</body>
+</html>

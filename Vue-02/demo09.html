@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>局部注册</title>
+    <!-- vue.js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+    <div id="app">
+        <component-a></component-a>
+        <component-b></component-b>
+
+        <!-- 无法实现 -->
+        <component-a>
+            <component-b></component-b>
+        </component-a>
+    </div>
+    <script>
+        var ComponentA = {
+            template: '<div>This is a division.</div>',
+            // 局部注册的组件在其子组件中不可用
+            // 此处我希望 ComponentB 在 ComponentA 中可用, 做了如下处理
+            // 但还是无法使用, 待处理
+            components: {
+                'component-b': ComponentB
+            }
+        }
+        var ComponentB = {
+            template: '<h1>This is a heading.</h1>'
+        }
+        new Vue({
+            el: "#app",
+            //局部注册一个组件
+            // 'key' : value
+            // key 为用在模板中自定义的元素名
+            // value 为自定义的 JavaScript 组件对象
+            components: {
+                'component-a': ComponentA,
+                'component-b': ComponentB
+            }
+        })
+    </script>
+</body>
+</html>

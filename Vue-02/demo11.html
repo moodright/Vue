@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Prop类型</title>
+    <!-- vue.js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+    <div id="app">
+        <component-a post-id="111" post-title="moonlight"></component-a>
+    </div>
+    <script>
+        var ComponentA = {
+            // 字符串数组形式列出的 prop
+            // props: ['postId', 'postTitle'],
+            // 以对象的形式列出 prop, 每个 prop 都有指定的值的类型
+            props: {
+              'postId': Number,
+              'postTitle': String
+            },
+            template: `
+                    <div>
+                        <h1>{{postTitle}}</h1>
+                        <p>{{postId}}</p>
+                    </div>
+            `
+        }
+
+        new Vue({
+           el: "#app",
+            // 局部注册自定义组件
+           components: {
+               'component-a' : ComponentA
+           }
+        });
+    </script>
+</body>
+</html>
