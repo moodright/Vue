@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-slot</title>
+    <!-- vue.js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <my-component-a>
+            <template v-slot:test>
+                <my-component-b></my-component-b>
+            </template>
+            <!-- 默认插槽 -->
+            <!-- 可以显示使用用 v-slot 指令指名为默认插槽内容, 也可以缺省 -->
+            <template v-slot:default>
+            </template>
+        </my-component-a>
+    </div>
+    <script>
+        Vue.component('my-component-a', {
+           template: `
+                    <div>
+                        <slot name="test"></slot>
+                        <slot>This is the default slot</slot>
+                    </div>
+           `
+        });
+        Vue.component('my-component-b', {
+           template: '<p>moon</p>'
+        });
+        new Vue({
+            el: "#app"
+        });
+    </script>
+</body>
+</html>
