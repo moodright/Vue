@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>计算属性</title>
+    <!-- vue.js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <p>{{time}}</p>
+    </div>
+    <script>
+        var vm = new Vue({
+           el: "#app",
+           computed: {
+               time: function () {
+                   // 改变 message 会导致函数重新调用?
+                   this.message;
+                   // 返回当前时间戳
+                   return Date.now();
+               }
+           },
+            data: {
+               message: ''
+            }
+        });
+    </script>
+</body>
+</html>
