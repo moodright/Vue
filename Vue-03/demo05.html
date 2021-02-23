@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义事件</title>
+    <!-- vue.js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <music-list>
+            <template v-slot:music-list>
+                <music-title :title="title"></music-title>
+            </template>
+            <template v-slot:music-contents>
+                <!-- 自定义事件 remove-content-event  -->
+                <!-- 监听 Vue 实例中的 removeContent 方法 -->
+                <music-contents v-for="(content,index) in musicContents"
+                                :content="content" :index="index"
+                                @remove-content-event="removeContent(index)"></music-contents>
+            </template>
+        </music-list>
+    </div>
+    <script>
+        Vue.component('music-list', {
+            template: `
+                    <div>
+                        <slot name="music-list"></slot>
+                        <ul>
+                            <slot name="music-contents"></slot>
+                        </ul>
+                    </div>`
+        });
+        Vue.component('music-title', {
+            props: ['title'],
+            template: `<p>{{title}}</p>`
+        });
+        Vue.component('music-contents' ,{
+            props: ['content', 'index'],
+            template: `<div>
+                           <li style="display: inline-block">{{content}}</li>
+                           <button @click="remove(index)">删除</button>
+                       </div>`,
+            methods: {
+                remove: function(index) {
+                    // console.log("remove function", index);
+                    // 触发当前实例上监听的自定义事件 remove-content-event
+                    // 并将 index 作为参数传递给监听器
+                    this.$emit("remove-content-event", index);
+                }
+            }
+        });
+        new Vue({
+           el: '#app',
+           data: {
+               title: 'Billie Eilish',
+               musicContents: ['Lo Vas A Olvidar', 'Lovely', 'Ocean Eyes']
+           },
+           methods: {
+               removeContent: function (index) {
+                   // console.log("removeContent function", index);
+                   // 移除数组中当前下标位置的元素
+                   // splice(start, deleteCount)
+                   //        start: 起始下标
+                   //        deleteCount: 移除个数
+                   this.musicContents.splice(index, 1);
+               }
+           }
+        });
+    </script>
+</body>
+</html>
